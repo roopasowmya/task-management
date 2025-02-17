@@ -24,7 +24,9 @@ const Task: React.FC = () => {
   useEffect(() => {
     const fetchTaskDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/user/${userId}/${taskId}/`);
+        const response = await fetch(
+          `http://localhost:8081/api/user/${userId}/${taskId}/`
+        );
         if (response.ok) {
           const taskDetails = await response.json();
 
@@ -36,10 +38,10 @@ const Task: React.FC = () => {
             workOfStatus: taskDetails.workOfStatus,
           });
         } else {
-          throw new Error('Failed to fetch task details');
+          throw new Error("Failed to fetch task details");
         }
-      } catch (error:any) {
-        console.error('Error fetching task details:', error.message);
+      } catch (error: any) {
+        console.error("Error fetching task details:", error.message);
       }
     };
 
@@ -48,31 +50,35 @@ const Task: React.FC = () => {
 
   const handleUpdateTask = async () => {
     try {
-      const updateResponse = await fetch(`http://localhost:8080/api/user/${userId}/${taskId}/`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(task),
-      });
+      const updateResponse = await fetch(
+        `http://localhost:8081/api/user/${userId}/${taskId}/`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(task),
+        }
+      );
 
       if (updateResponse.ok) {
         navigate(`/user/${userId}/TaskList`);
       } else {
-        throw new Error('Failed to update task details');
+        throw new Error("Failed to update task details");
       }
-    } catch (error:any) {
-      console.error('Error updating task details:', error.message);
+    } catch (error: any) {
+      console.error("Error updating task details:", error.message);
     }
   };
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setTask((prevTask) => ({ ...prevTask, [name]: value }));
   };
-
 
   return (
     <div className="max-w-md mx-auto p-4 border rounded shadow-md">

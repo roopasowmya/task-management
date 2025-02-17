@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "task")
 @Getter
@@ -14,13 +16,14 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer TaskId;
-    @Column(name = "task_name",nullable = false,length = 100)
+    @Column(name = "task_name", nullable = false, length = 100)
     private String taskName;
-    @Column(name = "deadline_date",nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Column(name = "deadline_date", nullable = false)
     private Date deadLine;
-    @Column(name = "description",length = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
-    @Column(name = "work_of_status",nullable = false)
+    @Column(name = "work_of_status", nullable = false)
     private String workOfStatus;
     @ManyToOne
     private User user;

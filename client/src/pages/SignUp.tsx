@@ -9,7 +9,7 @@ const SignUp: React.FC = () => {
 
   const handleSignUp = async () => {
     try {
-        const response = await fetch(`http://localhost:8080/api/users/`, {
+        const response = await fetch(`http://localhost:8081/api/users/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -18,7 +18,7 @@ const SignUp: React.FC = () => {
             userName: username,
             password: password,
           }),
-        });
+        }); 
 
         if (response.ok) {
           setRedirectToLogin(true);
